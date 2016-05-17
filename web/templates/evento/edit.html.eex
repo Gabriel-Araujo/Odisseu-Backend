@@ -1,0 +1,6 @@
+<h2>Edit evento</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: sede_evento_path(@conn, :update, @sede, @evento) %>
+
+<%= link "Back", to: sede_evento_path(@conn, :index, @sede) %>

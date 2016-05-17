@@ -1,0 +1,78 @@
+<h2>Show evento</h2>
+
+<ul>
+
+  <li>
+    <strong>Titulo:</strong>
+    <%= @evento.titulo %>
+  </li>
+
+  <li>
+    <strong>Subtitulo:</strong>
+    <%= @evento.subtitulo %>
+  </li>
+
+  <li>
+    <strong>Sede:</strong>
+    <%= @evento.sede_id %>
+  </li>
+
+  <li>
+    <strong>Resumo:</strong>
+    <%= @evento.resumo %>
+  </li>
+
+  <li>
+    <strong>Descricao:</strong>
+    <%= @evento.descricao %>
+  </li>
+
+  <li>
+    <strong>Extra:</strong>
+    <%= @evento.extra %>
+  </li>
+
+  <li>
+    <strong>Url imagem:</strong>
+    <%= @evento.url_imagem %>
+  </li>
+
+  <li>
+    <strong>Data extenso:</strong>
+    <%= @evento.data_extenso %>
+  </li>
+
+  <li>
+    <strong>Inicio:</strong>
+    <%= @evento.inicio %>
+  </li>
+
+  <li>
+    <strong>Final:</strong>
+    <%= @evento.final %>
+  </li>
+
+  <li>
+    <strong>Url maps:</strong>
+    <%= @evento.url_maps %>
+  </li>
+
+  <li>
+    <strong>Url inscricao:</strong>
+    <%= @evento.url_inscricao %>
+  </li>
+
+  <li>
+    <strong>Localizacao gps:</strong>
+    <%= @evento.localizacao_gps %>
+  </li>
+
+  <li>
+    <strong>Ativo:</strong>
+    <%= @evento.ativo %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: sede_evento_path(@conn, :edit, @sede, @evento) %>
+<%= link "Back", to: sede_evento_path(@conn, :index, @sede) %>

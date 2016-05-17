@@ -1,0 +1,58 @@
+<h2>Show sede</h2>
+
+<ul>
+
+  <li>
+    <strong>Nome:</strong>
+    <%= @sede.nome %>
+  </li>
+
+  <li>
+    <strong>Endereco:</strong>
+    <%= @sede.endereco %>
+  </li>
+
+  <li>
+    <strong>Telefone:</strong>
+    <%= @sede.telefone %>
+  </li>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @sede.email %>
+  </li>
+
+  <li>
+    <strong>Url imagem:</strong>
+    <%= @sede.url_imagem %>
+  </li>
+
+  <li>
+    <strong>Url instagram:</strong>
+    <%= @sede.url_instagram %>
+  </li>
+
+  <li>
+    <strong>Url facebook:</strong>
+    <%= @sede.url_facebook %>
+  </li>
+
+  <li>
+    <strong>Url maps:</strong>
+    <%= @sede.url_maps %>
+  </li>
+
+  <li>
+    <strong>Url ulisses:</strong>
+    <%= @sede.url_ulisses %>
+  </li>
+
+  <li>
+    <strong>Localizacao gps:</strong>
+    <%= @sede.localizacao_gps %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: sede_path(@conn, :edit, @sede) %>
+<%= link "Back", to: sede_path(@conn, :index) %>

@@ -1,0 +1,6 @@
+<h2>New sede</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: sede_path(@conn, :create) %>
+
+<%= link "Back", to: sede_path(@conn, :index) %>

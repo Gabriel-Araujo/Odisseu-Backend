@@ -1,0 +1,44 @@
+<h2>Listing sedes</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Endereco</th>
+      <th>Telefone</th>
+      <th>Email</th>
+      <th>Url imagem</th>
+      <th>Url instagram</th>
+      <th>Url facebook</th>
+      <th>Url maps</th>
+      <th>Url ulisses</th>
+      <th>Localizacao gps</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for sede <- @sedes do %>
+    <tr>
+      <td><%= sede.nome %></td>
+      <td><%= sede.endereco %></td>
+      <td><%= sede.telefone %></td>
+      <td><%= sede.email %></td>
+      <td><%= sede.url_imagem %></td>
+      <td><%= sede.url_instagram %></td>
+      <td><%= sede.url_facebook %></td>
+      <td><%= sede.url_maps %></td>
+      <td><%= sede.url_ulisses %></td>
+      <td><%= sede.localizacao_gps %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: sede_path(@conn, :show, sede), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: sede_path(@conn, :edit, sede), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: sede_path(@conn, :delete, sede), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New sede", to: sede_path(@conn, :new) %>

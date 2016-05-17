@@ -1,0 +1,52 @@
+<h2>Listing eventos</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Titulo</th>
+      <th>Subtitulo</th>
+      <th>Sede</th>
+      <th>Resumo</th>
+      <th>Descricao</th>
+      <th>Extra</th>
+      <th>Url imagem</th>
+      <th>Data extenso</th>
+      <th>Inicio</th>
+      <th>Final</th>
+      <th>Url maps</th>
+      <th>Url inscricao</th>
+      <th>Localizacao gps</th>
+      <th>Ativo</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for evento <- @eventos do %>
+    <tr>
+      <td><%= evento.titulo %></td>
+      <td><%= evento.subtitulo %></td>
+      <td><%= evento.sede_id %></td>
+      <td><%= evento.resumo %></td>
+      <td><%= evento.descricao %></td>
+      <td><%= evento.extra %></td>
+      <td><%= evento.url_imagem %></td>
+      <td><%= evento.data_extenso %></td>
+      <td><%= evento.inicio %></td>
+      <td><%= evento.final %></td>
+      <td><%= evento.url_maps %></td>
+      <td><%= evento.url_inscricao %></td>
+      <td><%= evento.localizacao_gps %></td>
+      <td><%= evento.ativo %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: sede_evento_path(@conn, :show, @sede, evento), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: sede_evento_path(@conn, :edit, @sede, evento), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: sede_evento_path(@conn, :delete, @sede, evento), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New evento", to: sede_evento_path(@conn, :new, @sede) %>

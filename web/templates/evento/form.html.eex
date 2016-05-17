@@ -1,0 +1,89 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :titulo, class: "control-label" %>
+    <%= text_input f, :titulo, class: "form-control" %>
+    <%= error_tag f, :titulo %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :subtitulo, class: "control-label" %>
+    <%= text_input f, :subtitulo, class: "form-control" %>
+    <%= error_tag f, :subtitulo %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :resumo, class: "control-label" %>
+    <%= textarea f, :resumo, class: "form-control" %>
+    <%= error_tag f, :resumo %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :descricao, class: "control-label" %>
+    <%= textarea f, :descricao, class: "form-control" %>
+    <%= error_tag f, :descricao %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :extra, class: "control-label" %>
+    <%= textarea f, :extra, class: "form-control" %>
+    <%= error_tag f, :extra %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :url_imagem, class: "control-label" %>
+    <%= text_input f, :url_imagem, class: "form-control" %>
+    <%= error_tag f, :url_imagem %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :data_extenso, class: "control-label" %>
+    <%= text_input f, :data_extenso, class: "form-control" %>
+    <%= error_tag f, :data_extenso %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :inicio, class: "control-label" %>
+    <%= datetime_select f, :inicio, class: "form-control" %>
+    <%= error_tag f, :inicio %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :final, class: "control-label" %>
+    <%= datetime_select f, :final, class: "form-control" %>
+    <%= error_tag f, :final %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :url_maps, class: "control-label" %>
+    <%= text_input f, :url_maps, class: "form-control" %>
+    <%= error_tag f, :url_maps %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :url_inscricao, class: "control-label" %>
+    <%= text_input f, :url_inscricao, class: "form-control" %>
+    <%= error_tag f, :url_inscricao %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :localizacao_gps, class: "control-label" %>
+    <%= text_input f, :localizacao_gps, class: "form-control" %>
+    <%= error_tag f, :localizacao_gps %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :ativo, class: "control-label" %>
+    <%= checkbox f, :ativo, class: "form-control" %>
+    <%= error_tag f, :ativo %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>
