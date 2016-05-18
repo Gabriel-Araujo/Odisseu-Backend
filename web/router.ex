@@ -23,11 +23,16 @@ defmodule Odisseu.Router do
     resources "/sedes", SedeController do
         resources "/eventos", EventoController
     end
-
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Odisseu do
-  #   pipe_through :api
-  # end
+  scope "/api", Odisseu do
+    pipe_through :api
+
+    get "/sedes/", Api.SedeController, :index
+    get "/sedes/:id", Api.SedeController, :show
+
+    get "/eventos/", Api.EventoController, :index
+    get "/eventos/:id", Api.EventoController, :show
+  end
 end
