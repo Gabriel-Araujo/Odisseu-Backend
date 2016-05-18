@@ -2,6 +2,7 @@ defmodule Odisseu.UserController do
   use Odisseu.Web, :controller
   alias Odisseu.User
   alias Odisseu.Perfil
+  alias Odisseu.Sede
 
   plug :scrub_params, "user" when action in [:create, :update]
   plug :authorize_admin when action in [:new, :create]
@@ -38,12 +39,14 @@ defmodule Odisseu.UserController do
 
   def new(conn, _params) do
     perfils = Repo.all(Perfil)
+    sedes = Repo.all(Sede)
     changeset = User.changeset(%User{})
-    render(conn, "new.html", changeset: changeset, perfils: perfils)
+    render(conn, "new.html", changeset: changeset, perfils: perfils, sedes: sedes)
   end
 
   def create(conn, %{"user" => user_params}) do
     perfils = Repo.all(Perfil)
+    sedes = Repo.all(Sede)
     changeset = User.changeset(%User{}, user_params)
 
     case Repo.insert(changeset) do
@@ -52,7 +55,7 @@ defmodule Odisseu.UserController do
         |> put_flash(:info, "User created successfully.")
         |> redirect(to: user_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset, perfils: perfils)
+        render(conn, "new.html", changeset: changeset, perfils: perfils, sedes: sedes)
     end
   end
 
@@ -63,13 +66,15 @@ defmodule Odisseu.UserController do
 
   def edit(conn, %{"id" => id}) do
     perfils = Repo.all(Perfil)
+    sedes = Repo.all(Sede)
     user = Repo.get!(User, id)
     changeset = User.changeset(user)
-    render(conn, "edit.html", user: user, changeset: changeset, perfils: perfils)
+    render(conn, "edit.html", user: user, changeset: changeset, perfils: perfils, sedes: sedes)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
     perfils = Repo.all(Perfil)
+    sedes = Repo.all(Sede)
     user = Repo.get!(User, id)
     changeset = User.changeset(user, user_params)
 
@@ -79,7 +84,7 @@ defmodule Odisseu.UserController do
         |> put_flash(:info, "User updated successfully.")
         |> redirect(to: user_path(conn, :show, user))
       {:error, changeset} ->
-        render(conn, "edit.html", user: user, changeset: changeset, perfils: perfils)
+        render(conn, "edit.html", user: user, changeset: changeset, perfils: perfils, sedes: sedes)
     end
   end
 

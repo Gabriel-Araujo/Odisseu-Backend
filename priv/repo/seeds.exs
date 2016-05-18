@@ -14,15 +14,42 @@ alias Odisseu.Repo
 alias Odisseu.Perfil
 alias Odisseu.Sede
 alias Odisseu.User
+import Ecto.Query, only: [from: 2]
 
-perfil = %Perfil{}
-  |> Perfil.changeset(%{descricao: "Administrador", admin: true})
-  |> Repo.insert!
+find_or_create_perfil = fn perfil_descricao, admin ->
+  case Repo.all(from p in Perfil, where: p.descricao == ^perfil_descricao and p.admin == ^admin) do
+    [] ->
+      %Perfil{}
+      |> Perfil.changeset(%{descricao: perfil_descricao, admin: admin})
+      |> Repo.insert!()
+    _ ->
+      IO.puts "Perfil: #{perfil_descricao} already exists, skipping"
+  end
+end
 
-sede = %Sede{}
-  |> Sede.changeset(%{email: "email@seed.com", endereco: "Endereco", localizacao_gps: "-99.99,99.99", nome: "Nome Sede", telefone: "(65) 9234-5678", url_facebook: "/", url_imagem: "http://", url_instagram: "/", url_maps: "http://", url_ulisses: "http://"})
-  |> Repo.insert!
+find_or_create_sede = fn sede_nome ->
+  case Repo.all(from s in Sede, where: s.nome == ^sede_nome) do
+    [] ->
+      %Sede{}
+      |> Sede.changeset(%{nome: sede_nome, estado: "Estado", email: "email@seed.com", endereco: "Endereco", localizacao_gps: "-99.99,99.99", telefone: "(65) 9234-5678", url_facebook: "/", url_imagem: "http://", url_instagram: "/", url_maps: "http://", url_ulisses: "http://"})
+      |> Repo.insert!()
+    _ ->
+      IO.puts "Sede: #{sede_nome} already exists, skipping"
+  end
+end
 
-admin = %User{}
-  |> User.changeset(%{username: "admin", email: "admin@test.com", password: "test", password_confirmation: "test", perfil_id: perfil.id, sede_id: sede.id})
-  |> Repo.insert!
+find_or_create_user = fn username, email, perfil, sede ->
+  case Repo.all(from u in User, where: u.username == ^username and u.email == ^email) do
+    [] ->
+      %User{}
+      |> User.changeset(%{username: username, email: email, password: "test", password_confirmation: "test", perfil_id: perfil.id, sede_id: sede.id})
+      |> Repo.insert!()
+    _ ->
+      IO.puts "User: #{username} already exists, skipping"
+  end
+end
+
+_user_perfil = find_or_create_perfil.("Usuario", false)
+admin_perfil = find_or_create_perfil.("Administrador", true)
+sede         = find_or_create_sede.("Sede")
+_admin_user  = find_or_create_user.("admin", "admin@test.com", admin_perfil, sede)

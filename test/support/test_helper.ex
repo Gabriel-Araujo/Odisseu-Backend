@@ -11,8 +11,8 @@ defmodule Odisseu.TestHelper do
     |> Repo.insert
   end
 
-  def create_sede(%{email: email, endereco: endereco, localizacao_gps: localizacao_gps, nome: nome, telefone: telefone, url_facebook: url_facebook, url_imagem: url_imagem, url_instagram: url_instagram, url_maps: url_maps, url_ulisses: url_ulisses}) do
-    Sede.changeset(%Sede{}, %{email: email, endereco: endereco, localizacao_gps: localizacao_gps, nome: nome, telefone: telefone, url_facebook: url_facebook, url_imagem: url_imagem, url_instagram: url_instagram, url_maps: url_maps, url_ulisses: url_ulisses})
+  def create_sede(%{email: email, estado: estado, endereco: endereco, localizacao_gps: localizacao_gps, nome: nome, telefone: telefone, url_facebook: url_facebook, url_imagem: url_imagem, url_instagram: url_instagram, url_maps: url_maps, url_ulisses: url_ulisses}) do
+    Sede.changeset(%Sede{}, %{email: email, estado: estado, endereco: endereco, localizacao_gps: localizacao_gps, nome: nome, telefone: telefone, url_facebook: url_facebook, url_imagem: url_imagem, url_instagram: url_instagram, url_maps: url_maps, url_ulisses: url_ulisses})
     |> Repo.insert
   end
 

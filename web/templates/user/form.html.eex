@@ -36,6 +36,12 @@
   </div>
 
   <div class="form-group">
+    <%= label f, :sede_id, "Sede", class: "control-label" %>
+    <%= select f, :sede_id, sedes_for_select(@sedes), class: "form-control" %>
+    <%= error_tag f, :sede_id %>
+  </div>
+
+  <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>

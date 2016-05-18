@@ -3,6 +3,7 @@ defmodule Odisseu.Sede do
 
   schema "sedes" do
     field :nome, :string
+    field :estado, :string
     field :endereco, :string
     field :telefone, :string
     field :email, :string
@@ -18,7 +19,7 @@ defmodule Odisseu.Sede do
     timestamps
   end
 
-  @required_fields ~w(nome endereco telefone email url_imagem url_instagram url_facebook url_maps url_ulisses localizacao_gps)
+  @required_fields ~w(nome estado endereco telefone email url_imagem url_instagram url_facebook url_maps url_ulisses localizacao_gps)
   @optional_fields ~w()
 
   @doc """

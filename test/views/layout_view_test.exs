@@ -5,7 +5,7 @@ defmodule Odisseu.LayoutViewTest do
 
   setup do
     {:ok, perfil} = TestHelper.create_perfil(%{descricao: "User", admin: false})
-    {:ok, sede} = TestHelper.create_sede(%{email: "some content", endereco: "some content", localizacao_gps: "some content", nome: "some content", telefone: "some content", url_facebook: "some content", url_imagem: "some content", url_instagram: "some content", url_maps: "some content", url_ulisses: "some content"})
+    {:ok, sede} = TestHelper.create_sede(%{email: "some content", estado: "estado", endereco: "some content", localizacao_gps: "some content", nome: "some content", telefone: "some content", url_facebook: "some content", url_imagem: "some content", url_instagram: "some content", url_maps: "some content", url_ulisses: "some content"})
     {:ok, user} = TestHelper.create_user(perfil, sede, %{username: "test", password: "test", password_confirmation: "test", email: "test@test.com"})
     conn = conn()
     {:ok, conn: conn, user: user}
