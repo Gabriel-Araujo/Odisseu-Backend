@@ -7,10 +7,10 @@ defmodule Odisseu.EventoControllerTest do
   @invalid_attrs %{data_extenso: nil, descricao: nil, extra: nil, final: nil, inicio: nil, localizacao_gps: nil, resumo: nil, subtitulo: nil, titulo: nil, url_imagem: nil, url_inscricao: nil, url_maps: nil}
 
   setup do
-    {:ok, perfil}  = TestHelper.create_perfil(%{descricao: "user perfil", admin: false})
-    {:ok, sede} = TestHelper.create_sede(%{email: "some content", estado: "estado", endereco: "some content", localizacao_gps: "some content", nome: "some content", telefone: "some content", url_facebook: "some content", url_imagem: "some content", url_instagram: "some content", url_maps: "some content", url_ulisses: "some content"})
-    {:ok, user} = TestHelper.create_user(perfil, sede, %{email: "test@test.com", username: "testuser", password: "test", password_confirmation: "test"})
-    {:ok, evento} = TestHelper.create_evento(sede, %{ativo: true, data_extenso: "some content", descricao: "some content", extra: "some content", final: "2010-04-17 14:00:00", inicio: "2010-04-17 14:00:00", localizacao_gps: "some content", resumo: "some content", subtitulo: "some content", titulo: "some content", url_imagem: "some content", url_inscricao: "some content", url_maps: "some content"})
+    sede = Factory.create(:sede)
+    perfil = Factory.create(:perfil)
+    user = Factory.create(:user, perfil: perfil, sede: sede)
+    evento = Factory.create(:evento, sede: sede)
 
     conn = conn() |> login_user(user)
     {:ok, conn: conn, user: user, perfil: perfil, sede: sede, evento: evento}

@@ -27,6 +27,8 @@ defmodule Odisseu.ConnCase do
 
       import Odisseu.Router.Helpers
 
+      alias Odisseu.Factory
+
       # The default endpoint for testing
       @endpoint Odisseu.Endpoint
     end

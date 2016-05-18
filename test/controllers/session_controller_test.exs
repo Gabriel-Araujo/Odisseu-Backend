@@ -1,13 +1,17 @@
 defmodule Odisseu.SessionControllerTest do
   use Odisseu.ConnCase
-  alias Odisseu.TestHelper
 
   setup do
-    {:ok, perfil} = TestHelper.create_perfil(%{descricao: "User", admin: false})
-    {:ok, sede} = TestHelper.create_sede(%{email: "some content", estado: "estado", endereco: "some content", localizacao_gps: "some content", nome: "some content", telefone: "some content", url_facebook: "some content", url_imagem: "some content", url_instagram: "some content", url_maps: "some content", url_ulisses: "some content"})
-    {:ok, _user} = TestHelper.create_user(perfil, sede, %{username: "test", password: "test", password_confirmation: "test", email: "test@test.com"})
+    #{:ok, perfil} = TestHelper.create_perfil(%{descricao: "User", admin: false})
+    #{:ok, sede} = TestHelper.create_sede(%{email: "some content", estado: "estado", endereco: "some content", localizacao_gps: "some content", nome: "some content", telefone: "some content", url_facebook: "some content", url_imagem: "some content", url_instagram: "some content", url_maps: "some content", url_ulisses: "some content"})
+    #{:ok, _user} = TestHelper.create_user(perfil, sede, %{username: "test", password: "test", password_confirmation: "test", email: "test@test.com"})
+
+    sede = Factory.create(:sede)
+    perfil = Factory.create(:perfil)
+    user = Factory.create(:user, perfil: perfil, sede: sede)
+
     conn = conn()
-    {:ok, conn: conn}
+    {:ok, conn: conn, user: user}
   end
 
   test "shows the login form", %{conn: conn} do
@@ -15,8 +19,8 @@ defmodule Odisseu.SessionControllerTest do
     assert html_response(conn, 200) =~ "Login"
   end
 
-  test "creates a new user session for a valid user", %{conn: conn} do
-    conn = post conn, session_path(conn, :create), user: %{username: "test", password: "test"}
+  test "creates a new user session for a valid user", %{conn: conn, user: user} do
+    conn = post conn, session_path(conn, :create), user: %{username: user.username, password: user.password}
     assert get_session(conn, :current_user)
     assert get_flash(conn, :info) == "Sign in successful!"
     assert redirected_to(conn) == page_path(conn, :index)

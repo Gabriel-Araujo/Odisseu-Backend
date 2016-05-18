@@ -1,5 +1,6 @@
 defmodule Odisseu.UserControllerTest do
   use Odisseu.ConnCase
+
   alias Odisseu.User
   alias Odisseu.TestHelper
 
@@ -8,13 +9,13 @@ defmodule Odisseu.UserControllerTest do
   @invalid_attrs %{}
 
   setup do
-    {:ok, sede} = TestHelper.create_sede(%{email: "some content", estado: "estado", endereco: "some content", localizacao_gps: "some content", nome: "some content", telefone: "some content", url_facebook: "some content", url_imagem: "some content", url_instagram: "some content", url_maps: "some content", url_ulisses: "some content"})
+    sede = Factory.create(:sede)
 
-    {:ok, user_perfil}  = TestHelper.create_perfil(%{descricao: "user", admin: false})
-    {:ok, nonadmin_user} = TestHelper.create_user(user_perfil, sede, %{username: "nonadmin", password: "test", password_confirmation: "test", email: "nonadmin@test.com"})
+    user_perfil = Factory.create(:perfil)
+    nonadmin_user = Factory.create(:user, perfil: user_perfil, sede: sede)
 
-    {:ok, admin_perfil} = TestHelper.create_perfil(%{descricao: "admin", admin: true})
-    {:ok, admin_user} = TestHelper.create_user(admin_perfil, sede, %{username: "admin", password: "test", password_confirmation: "test", email: "admin@test.com"})
+    admin_perfil = Factory.create(:perfil, admin: true)
+    admin_user = Factory.create(:user, perfil: admin_perfil, sede: sede)
 
     conn = conn()
     {:ok, conn: conn, user_perfil: user_perfil, nonadmin_user: nonadmin_user, admin_perfil: admin_perfil, admin_user: admin_user, sede: sede}
