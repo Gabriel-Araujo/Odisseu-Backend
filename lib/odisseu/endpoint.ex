@@ -35,5 +35,6 @@ defmodule Odisseu.Endpoint do
     key: "_odisseu_key",
     signing_salt: "njzgOkSv"
 
+  plug Corsica, origins: "*", allow_headers: ["accept", "content-type"]
   plug Odisseu.Router
 end

@@ -42,6 +42,7 @@ defmodule Odisseu.Mixfile do
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
      {:comeonin, "~> 2.1"},
+     {:corsica, "~> 0.4"},
      {:ex_machina, "~> 0.6.1"}]
   end
 

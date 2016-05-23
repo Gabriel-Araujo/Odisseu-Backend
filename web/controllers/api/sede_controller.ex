@@ -6,7 +6,7 @@ defmodule Odisseu.Api.SedeController do
   plug :scrub_params, "sede" when action in [:create, :update]
 
   def index(conn, _params) do
-    sedes = Repo.all(Sede)
+    sedes = Repo.all from s in Sede, order_by: [s.estado, s.nome]
     render(conn, "index.json", sedes: sedes)
   end
 

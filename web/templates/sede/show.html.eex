@@ -8,6 +8,11 @@
   </li>
 
   <li>
+    <strong>Estado:</strong>
+    <%= @sede.estado %>
+  </li>
+
+  <li>
     <strong>Endereco:</strong>
     <%= @sede.endereco %>
   </li>
