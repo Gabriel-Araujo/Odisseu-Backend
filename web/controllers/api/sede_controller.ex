@@ -5,7 +5,7 @@ defmodule Odisseu.Api.SedeController do
 
   plug :scrub_params, "sede" when action in [:create, :update]
 
-  def index(conn, _params) do
+  def index(conn, params) do
     sedes = Repo.all from s in Sede, order_by: [s.estado, s.nome]
     render(conn, "index.json", sedes: sedes)
   end
@@ -29,6 +29,25 @@ defmodule Odisseu.Api.SedeController do
   def show(conn, %{"id" => id}) do
     sede = Repo.get!(Sede, id)
     render(conn, "show.json", sede: sede)
+  end
+
+  def search(conn, %{"loc" => loc}) do
+    sedes = Repo.all from s in Sede, order_by: [s.estado, s.nome]
+    locDevice = String.split(loc, ",") |> Enum.map(fn(x) -> String.to_float(x) end)
+
+    {distance, nearSede} = Enum.map(sedes, fn (sede) -> sortBestDistance(locDevice, sede) end)
+      |> Enum.sort()
+      |> Enum.at(0)
+
+    IO.inspect distance
+
+    render(conn, "show.json", sede: nearSede)
+  end
+
+  def sortBestDistance(locDevice, sede) do
+    locSede = String.split(sede.localizacao_gps, ",") |> Enum.map(fn(x) -> String.to_float(x) end)
+    distance = Geocalc.distance_between(locDevice, locSede)
+    {distance, sede}
   end
 
   def update(conn, %{"id" => id, "sede" => sede_params}) do

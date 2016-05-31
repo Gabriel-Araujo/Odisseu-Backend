@@ -29,6 +29,8 @@ defmodule Odisseu.Router do
   scope "/api", Odisseu do
     pipe_through :api
 
+    get "/searchSedes/:loc", Api.SedeController, :search
+
     get "/sedes/", Api.SedeController, :index
     get "/sedes/:id", Api.SedeController, :show
 
